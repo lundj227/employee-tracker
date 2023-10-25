@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const {} = require('functions')
+// const {} = require('functions');
 inquirer
     .prompt([
         {
