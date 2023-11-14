@@ -1,7 +1,8 @@
 const inquirer = require('inquirer');
-const fs = require('fs');
-// const {} = require('functions');
-inquirer
+const {viewAllEmployees} = require('./functions.js');
+
+function questions(){
+    inquirer
     .prompt([
         {
             type: 'list',
@@ -22,7 +23,7 @@ inquirer
         (data) => {
             switch (data.optionsToDo) {
                 case 'View all employees':
-                    viewAllEmployees();
+                    viewAllEmployees(questions);
                     break;
                 case 'Add Employee':
                     addEmployee();
@@ -49,3 +50,5 @@ inquirer
             }
         }
     ).catch((err) => console.log(err));
+};
+questions();
