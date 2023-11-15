@@ -22,12 +22,12 @@ function addEmployee(callback) {
             },
             {
                 type: 'input',
-                message: 'What is the last name of the employee you would like to add',
+                message: 'What is the last name of the employee you would like to add?',
                 name: 'newEmployeeLast'
             },
             {
                 type: 'input',
-                message: 'Please pick the number (1-9) that coorisponds with your new employees role',
+                message: 'Please pick the number (1-9) that coorisponds with your new employees role:',
                 name: 'newEmployeeRole'
             }
         ]).then((data) => {
