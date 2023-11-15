@@ -45,7 +45,48 @@ function addEmployee(callback) {
 
 function updateEmployeeRole(callback) {
     // Implement logic for updating an employee's role
+    db.query('SELECT * FROM employee', function(err, employees) {
+        if (err) {
+            console.log(err);
+            return callback();
+        }
+
+        const employeeChoices = employees.map(employee => ({
+            name: `${employee.first_name} ${employee.last_name}`,
+            value: employee.id
+        }));
+
+        inquirer.prompt([
+            {
+                type: 'list',
+                message: 'Select an employee to update:',
+                choices: employeeChoices,
+                name: 'employeeId'
+            },
+            {
+                type: 'input',
+                message: 'Enter the new role ID for the employee:',
+                name: 'newRoleId'
+            }
+        ]).then((data) => {
+            const employeeId = data.employeeId;
+            const newRoleId = data.newRoleId;
+
+            db.query('UPDATE employee SET role_id = ? WHERE id = ?', [newRoleId, employeeId], function(err, results) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log('Employee role updated');
+                }
+                callback();
+            });
+        }).catch((err) => {
+            console.log(err);
+            callback();
+        });
+    });
 }
+
 
 function viewAllRoles(callback) {
     // Implement logic for viewing all roles
