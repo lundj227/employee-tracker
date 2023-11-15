@@ -57,6 +57,34 @@ function viewAllRoles(callback) {
 
 function addRole(callback) {
     // Implement logic for adding a role
+    // role needs a title, salary, and department
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                message: 'What is the title of your new role?',
+                name: 'newRoleTitle'
+            },
+            {
+                type: 'input',
+                message: 'What is the salary of this role',
+                name: 'newRoleSalary'
+            },
+            {
+                type: 'input',
+                message: "Please pick the number (1-9) that coorisponds with your new role's department:",
+                name: 'newRoleDepartment'
+            }
+        ]).then((data) => {
+            const newTitle = data.newRoleTitle;
+            const newSalary = data.newRoleSalary;
+            const newRoleDepart = data.newRoleDepartment;
+            db.query("INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)", [newTitle, newSalary, newRoleDepart],
+            function (err, results){
+                console.log('New Role Added');
+                callback();
+            });
+        }).catch((err) => console.log(err));
 }
 
 function viewAllDepartments(callback) {
