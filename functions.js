@@ -9,27 +9,35 @@ function viewAllEmployees(callback) {
     });
 }
 
-function addEmployee() {
+function addEmployee(callback) {
     // Implement logic for adding an employee
 }
 
-function updateEmployeeRole() {
+function updateEmployeeRole(callback) {
     // Implement logic for updating an employee's role
 }
 
-function viewAllRoles() {
+function viewAllRoles(callback) {
     // Implement logic for viewing all roles
+    return db.query('SELECT * FROM role', function(err, results){
+        console.table(results);
+        callback()
+    });
 }
 
-function addRole() {
+function addRole(callback) {
     // Implement logic for adding a role
 }
 
-function viewAllDepartments() {
-    // Implement logic for viewing all departments
+function viewAllDepartments(callback) {
+    return db.query('SELECT * FROM departments', function(err, results){
+        console.table(results);
+        callback()
+    });
 }
 
-function addDepartment() {
+function addDepartment(callback) {
     // Implement logic for adding a department
 }
-module.exports = {viewAllEmployees};
+
+module.exports = {viewAllEmployees, addEmployee, updateEmployeeRole, viewAllRoles, addRole, viewAllDepartments, addDepartment};

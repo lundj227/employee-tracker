@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const {viewAllEmployees} = require('./functions.js');
+const {viewAllEmployees, addEmployee, updateEmployeeRole, viewAllRoles, addRole, viewAllDepartments, addDepartment} = require('./functions.js');
 
 function questions(){
     inquirer
@@ -26,25 +26,26 @@ function questions(){
                     viewAllEmployees(questions);
                     break;
                 case 'Add Employee':
-                    addEmployee();
+                    addEmployee(questions);
                     break;
                 case 'Update Employee Role':
-                    updateEmployeeRole();
+                    updateEmployeeRole(questions);
                     break;
                 case 'View All Roles':
-                    viewAllRoles();
+                    viewAllRoles(questions);
                     break;
                 case 'Add Role':
-                    addRole();
+                    addRole(questions);
                     break;
                 case 'View all Departments':
-                    viewAllDepartments();
+                    viewAllDepartments(questions);
                     break;
                 case 'Add Department':
-                    addDepartment();
+                    addDepartment(questions);
                     break;
                 case 'Quit':
-                    break;
+                    console.log('Goodbye!');
+                    process.exit();
                 default:
                     console.log('Invalid option');
             }
