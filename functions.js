@@ -96,6 +96,22 @@ function viewAllDepartments(callback) {
 
 function addDepartment(callback) {
     // Implement logic for adding a department
+    // departments need name
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                message: 'What is the title of your new department?',
+                name: 'newDepartment'
+            }
+        ]).then((data) => {
+            const newDepart = data.newDepartment;
+            db.query("INSERT INTO departments (name) VALUES (?)", [newDepart],
+            function (err, results){
+                console.log('New Department Added');
+                callback();
+            });
+        }).catch((err) => console.log(err));
 }
 
 module.exports = {viewAllEmployees, addEmployee, updateEmployeeRole, viewAllRoles, addRole, viewAllDepartments, addDepartment};
